@@ -228,7 +228,7 @@ export const resetPassword =
       console.log("passwords:", password, passwordConfirm);
 
       dispatch({ type: NEW_PASSWORD_REQUEST });
-
+      console.log("dispatch sent");
       const config = {
         headers: {
           "Content-Type": "application/json",
