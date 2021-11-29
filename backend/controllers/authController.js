@@ -80,10 +80,7 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
 exports.resetPassword = catchAsync(async (req, res, next) => {
   //hash url token
   consoole.log(req.params.token);
-  const resetPasswordToken = crypto
-    .createHash("sha256")
-    .update(req.params.token)
-    .digest("hex");
+  const resetPasswordToken = getResetPasswordToken();
 
   console.log("finding the user");
 
