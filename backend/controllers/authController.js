@@ -81,6 +81,7 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
   //hash url token
   consoole.log(req.params.token);
   const resetPasswordToken = getResetPasswordToken();
+  console.log(resetPasswordToken);
 
   console.log("finding the user");
 
