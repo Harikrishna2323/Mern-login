@@ -221,35 +221,36 @@ export const forgotPassword = (email) => async (dispatch) => {
 };
 
 // Reset password
-export const resetPassword = (token, passwords) => async (dispatch) => {
-  try {
-    console.log("step starts here");
-    console.log("passwords:", passwords);
+export const resetPassword =
+  (token, password, passwordConfirm) => async (dispatch) => {
+    try {
+      console.log("step starts here");
+      console.log("passwords:", password, passwordConfirm);
 
-    dispatch({ type: NEW_PASSWORD_REQUEST });
+      dispatch({ type: NEW_PASSWORD_REQUEST });
 
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
 
-    const { data } = await axios.patch(
-      `/api/v1/password/reset/${token}`,
-      passwords,
-      config
-    );
-    console.log(data);
+      const { data } = await axios.patch(
+        `/api/v1/password/reset/${token}`,
+        { password, passwordConfirm },
+        config
+      );
+      console.log(data);
 
-    dispatch({
-      type: NEW_PASSWORD_SUCCESS,
-      payload: data.success,
-    });
-  } catch (error) {
-    console.log("error:", error);
-    dispatch({
-      type: NEW_PASSWORD_FAIL,
-      payload: error.response.data.message,
-    });
-  }
-};
+      dispatch({
+        type: NEW_PASSWORD_SUCCESS,
+        payload: data.success,
+      });
+    } catch (error) {
+      console.log("error:", error);
+      dispatch({
+        type: NEW_PASSWORD_FAIL,
+        payload: error.response.data.message,
+      });
+    }
+  };
