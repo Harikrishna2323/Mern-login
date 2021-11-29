@@ -79,9 +79,11 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
 //to reset password => /api/v1/password/reset:token
 exports.resetPassword = catchAsync(async (req, res, next) => {
   //hash url token
-  consoole.log(req.params.token);
-  const resetPasswordToken = getResetPasswordToken();
-  console.log(resetPasswordToken);
+  console.log(req.params.token);
+  const resetPasswordToken = crypto
+    .createHash("sha256")
+    .update(req.params.token)
+    .digest("hex");
 
   console.log("finding the user");
 
