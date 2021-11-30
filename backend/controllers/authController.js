@@ -74,7 +74,7 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
     user.resetPasswordToken = undefined;
     user.resetPasswordExpire = undefined;
     await user.save({ validateBeforeSave: false });
-    return next(new ErrorHandler(err.message, 500));
+    return next(new ErrorHandler(error.message, 500));
   }
 });
 
