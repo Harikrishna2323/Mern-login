@@ -3,12 +3,11 @@ const nodemailer = require("nodemailer");
 const sendEmail = async (options) => {
   //create a transporter
   const transporter = nodemailer.createTransport({
-    // service: "Gmail",
-    host: process.env.SMTP_HOST,
-    port: process.env.SMTP_PORT,
+    service: "Gmail",
+
     auth: {
-      user: process.env.EMAIL_USERNAME,
-      pass: process.env.EMAIL_PASSWORD,
+      user: process.env.EMAIL,
+      pass: process.env.PASSWORD,
     },
   });
   // console.log(EMAIL_USERNAME, EMAIL_PASSWORD);
