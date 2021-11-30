@@ -69,9 +69,9 @@ const Register = ({ history }) => {
               </div>
 
               <div className="form-group">
-                <label htmlFor="age_field">Email</label>
+                <label htmlFor="age_field">Age</label>
                 <input
-                  type="email"
+                  type="number"
                   id="age_field"
                   className="form-control"
                   name="age"

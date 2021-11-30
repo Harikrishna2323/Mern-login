@@ -14,6 +14,7 @@ const UpdateProfile = ({ history }) => {
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [age, setAge] = useState("");
 
   const { user } = useSelector((state) => state.auth);
 
@@ -23,6 +24,7 @@ const UpdateProfile = ({ history }) => {
     if (user) {
       setName(user.name);
       setEmail(user.email);
+      setAge(user.age);
     }
     console.log(error);
 
@@ -46,7 +48,7 @@ const UpdateProfile = ({ history }) => {
   const submitHandler = (e) => {
     e.preventDefault();
     console.log("name, email: ", name, email);
-    dispatch(updateProfile(name, email));
+    dispatch(updateProfile(name, email, age));
   };
 
   return (
@@ -82,6 +84,18 @@ const UpdateProfile = ({ history }) => {
                   name="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="age_field">Name</label>
+                <input
+                  type="name"
+                  id="age_field"
+                  className="form-control"
+                  name="age"
+                  value={age}
+                  onChange={(e) => setAge(e.target.value)}
                 />
               </div>
 

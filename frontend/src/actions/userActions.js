@@ -123,7 +123,7 @@ export const logout = () => async (dispatch) => {
 };
 
 //Update user profile
-export const updateProfile = (name, email) => async (dispatch) => {
+export const updateProfile = (name, email, age) => async (dispatch) => {
   try {
     dispatch({ type: UPDATE_USER_REQUEST });
 
@@ -135,7 +135,7 @@ export const updateProfile = (name, email) => async (dispatch) => {
 
     const { data } = await axios.patch(
       "/api/v1/me/update",
-      { name, email },
+      { name, email, age },
       config
     );
     console.log(data);
