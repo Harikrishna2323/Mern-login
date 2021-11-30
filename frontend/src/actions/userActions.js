@@ -213,6 +213,7 @@ export const forgotPassword = (email) => async (dispatch) => {
       payload: data.message,
     });
   } catch (error) {
+    console.log(error);
     dispatch({
       type: FORGOT_PASSWORD_FAIL,
       payload: error.response.data.message,
