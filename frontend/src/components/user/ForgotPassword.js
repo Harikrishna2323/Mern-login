@@ -26,6 +26,7 @@ const ForgotPassword = () => {
       dispatch(clearErrors);
     }
   }, [dispatch, alert, message, error]);
+  console.log(email);
 
   const submitHandler = (e) => {
     e.preventDefault();
