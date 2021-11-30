@@ -29,6 +29,9 @@ const Profile = () => {
                 <h4>Full Name</h4>
                 <p>{user.name}</p>
 
+                <h4>Age</h4>
+                <p>{user.age}</p>
+
                 <h4>Email Address</h4>
                 <p>{user.email}</p>
 

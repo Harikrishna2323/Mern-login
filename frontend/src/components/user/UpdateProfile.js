@@ -88,9 +88,9 @@ const UpdateProfile = ({ history }) => {
               </div>
 
               <div className="form-group">
-                <label htmlFor="age_field">Name</label>
+                <label htmlFor="age_field">Age</label>
                 <input
-                  type="name"
+                  type="number"
                   id="age_field"
                   className="form-control"
                   name="age"
