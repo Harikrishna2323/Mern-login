@@ -7,11 +7,12 @@ const crypto = require("crypto");
 const sendToken = require("../utils/jwtToken");
 
 exports.registerUser = catchAsync(async (req, res, next) => {
-  const { name, email, password } = req.body;
+  const { name, email, age, password } = req.body;
   console.log(req.body);
   const user = await Users.create({
     name,
     email,
+    age,
     password,
   });
   sendToken(user, 201, res);
@@ -144,6 +145,7 @@ exports.updateProfile = catchAsync(async (req, res, next) => {
   const newUserData = {
     name: req.body.name,
     email: req.body.email,
+    age: req.body.age,
   };
 
   const user = await Users.findByIdAndUpdate(req.user.id, newUserData, {

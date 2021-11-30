@@ -10,6 +10,7 @@ const Register = ({ history }) => {
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [age, setAge] = useState();
   const [password, setPassword] = useState("");
 
   const { isAuthenticated, error, loading } = useSelector(
@@ -29,7 +30,7 @@ const Register = ({ history }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(register(name, email, password));
+    dispatch(register(name, email, age, password));
   };
   return (
     <Fragment>
@@ -64,6 +65,18 @@ const Register = ({ history }) => {
                   name="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="age_field">Email</label>
+                <input
+                  type="email"
+                  id="age_field"
+                  className="form-control"
+                  name="age"
+                  value={age}
+                  onChange={(e) => setAge(e.target.value)}
                 />
               </div>
 
