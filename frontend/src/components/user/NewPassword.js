@@ -27,7 +27,6 @@ const NewPassword = ({ history, match }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log(match.params);
     console.log(match.params.token, password, passwordConfirm);
     dispatch(resetPassword(match.params.token, password, passwordConfirm));
   };
