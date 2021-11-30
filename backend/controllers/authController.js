@@ -50,13 +50,13 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
     return next(new ErrorHandler("User not Found with this email.", 404));
   }
   //get reset token
-  const restToken = user.getResetPasswordToken();
+  const resetToken = user.getResetPasswordToken();
   await user.save({ validateBeforeSave: false });
 
   //create reset password url
   const resetUrl = `${req.protocol}://${req.get(
     "host"
-  )}/password/reset/${restToken}`;
+  )}/password/reset/${resetToken}`;
   const message = `Your password reset token is as follows:\n\n${resetUrl}\n\nIf you have not requested this email, please ignore it.`;
 
   try {
@@ -71,8 +71,8 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
     });
   } catch (error) {
     console.log("error:", error);
-    user.resetPasswordToken = undefined;
-    user.resetPasswordExpire = undefined;
+    user.passwordResetToken = undefined;
+    user.passwordResetExpire = undefined;
     await user.save({ validateBeforeSave: false });
     return next(new ErrorHandler(error.message, 500));
   }
@@ -81,8 +81,7 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
 //to reset password => /api/v1/password/reset:token
 exports.resetPassword = catchAsync(async (req, res, next) => {
   //hash url token
-  console.log(req.params.token);
-  const resetPasswordToken = crypto
+  const passwordResetToken = crypto
     .createHash("sha256")
     .update(req.params.token)
     .digest("hex");
@@ -90,8 +89,8 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
   console.log("finding the user");
 
   const user = await Users.findOne({
-    resetPasswordToken,
-    resetPasswordExpire: { $gt: Date.now() },
+    passwordResetToken,
+    passwordResetExpire: { $gt: Date.now() },
   });
 
   if (!user) {
@@ -106,8 +105,8 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
 
   //setup new password
   user.password = req.body.password;
-  user.resetPasswordToken = undefined;
-  user.resetPasswordExpire = undefined;
+  user.passwordResetToken = undefined;
+  user.passwordResetExpire = undefined;
   await user.save();
 
   sendToken(user, 200, res);
